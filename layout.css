@@ -1,0 +1,158 @@
+/* Make sure the page fills the viewport */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Flexbox layout for the whole page */
+body {
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    color: aquamarine;
+    background-color: #2c2f33;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    min-width: 0;
+    width: 100%;
+    /* Ensure container takes full width */
+    overflow: hidden;
+    /* Hide default scrollbars */
+}
+
+/* Common box styling */
+.box {
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid aquamarine;
+}
+
+/* Left and right specific styles */
+.left-box {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    /* prevent children from pushing height */
+}
+
+.right-box {
+    background-color: #2c2f33;
+    flex: 2;
+    min-width: 300px;
+    min-height: 600px;
+    /* Or set a specific fixed height */
+    overflow-y: auto;
+}
+
+/* Logo/header line */
+.header {
+    border-bottom: 2px solid aquamarine;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.terminal-wrapper {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: #2c2f33;
+}
+
+.output-scroll-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.output-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 20px;
+    white-space: pre-wrap;
+    gap: 5px;
+    color: aquamarine;
+    flex-shrink: 0;
+}
+
+.terminal-output {
+    font-size: 20px;
+    margin: 2px 0 10px 0;
+}
+
+.prompt {
+    margin-right: 10px;
+}
+
+.command-line {
+    color: aquamarine;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#userInput {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: aquamarine;
+    font-size: 20px;
+    caret-color: aquamarine;
+    width: 100%;
+    font-family: monospace;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        /* Allow container to grow beyond viewport height */
+        min-height: 100vh;
+        /* Ensure it takes full height on smaller screens */
+        overflow: auto;
+        /* Enable scrolling for the whole page */
+    }
+
+    .left-box,
+    .right-box {
+        flex: 0 0 auto;
+        /* Prevent shrinking */
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 500px;
+        /* Ensure minimum height for each box */
+        overflow-y: auto;
+        /* Allow scroll within the boxes */
+    }
+
+    .right-box {
+        min-height: 800px;
+        /* Set a larger minimum height for the right box */
+    }
+
+    /* Adjust max-height of terminal output to prevent infinite expansion */
+    .output-container {
+        max-height: 400px;
+        /* Set a max height for the terminal output */
+        overflow-y: auto;
+        /* Enable scrolling inside the terminal output */
+    }
+}
